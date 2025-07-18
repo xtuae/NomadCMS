@@ -15,7 +15,6 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: 'https://nomad-neon.onrender.com', // ✅ Replace with your Render backend URL
   cors: [
     'http://localhost:5173', // local Vite dev
     'http://localhost:5174', // optional second port
