@@ -10,16 +10,16 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Places } from './collections/Places'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: 'https://nomad-neon.onrender.com',
+  serverURL: 'https://nomad-neon.onrender.com', // ✅ Replace with your Render backend URL
   cors: [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    // 'https://nomad-sooty.vercel.app',
-    'https://nomad-gray.vercel.app',
+    'http://localhost:5173', // local Vite dev
+    'http://localhost:5174', // optional second port
+    'https://nomad-gray.vercel.app', // ✅ your Vercel frontend
   ],
   admin: {
     user: Users.slug,
