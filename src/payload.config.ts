@@ -18,7 +18,7 @@ export default buildConfig({
   cors: [
     'http://localhost:5173',
     'http://localhost:5174',
-    'https://nomad-sooty.vercel.app',
+    // 'https://nomad-sooty.vercel.app',
     'https://nomad-gray.vercel.app',
   ],
   admin: {
