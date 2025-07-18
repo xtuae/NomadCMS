@@ -14,8 +14,8 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: 'http://localhost:3000',
-  cors: ['http://localhost:5173', 'http://localhost:5174'],
+  serverURL: 'https://nomad-neon.onrender.com',
+  cors: ['http://localhost:5173', 'http://localhost:5174', 'https://nomad-sooty.vercel.app'],
   admin: {
     user: Users.slug,
     importMap: {
