@@ -16,8 +16,6 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   cors: [
-    'http://localhost:5173', // local Vite dev
-    'http://localhost:5174', // optional second port
     'https://nomad-gray.vercel.app', // ✅ your Vercel frontend
   ],
   admin: {
