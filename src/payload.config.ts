@@ -15,6 +15,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  serverURL: 'https://nomad-neon.onrender.com',
   cors: [
     'https://nomad-gray.vercel.app', // ✅ your Vercel frontend
   ],
