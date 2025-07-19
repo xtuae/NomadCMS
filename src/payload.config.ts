@@ -17,7 +17,7 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   serverURL: 'https://nomad-neon.onrender.com',
   cors: [
-    'https://nomad-gray.vercel.app', // ✅ your Vercel frontend
+    'https://nomad-vite.vercel.app/', // ✅ your Vercel frontend
   ],
   admin: {
     user: Users.slug,
