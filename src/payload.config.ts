@@ -20,9 +20,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-
-  // ✅ Add this section for built-in CORS support
-  cors: ['https://nomad-vite.vercel.app'],
+  cors: ['https://your-frontend.vercel.app'], // ✅ this is correct
 
   collections: [Users, Media, Places],
   editor: lexicalEditor(),
