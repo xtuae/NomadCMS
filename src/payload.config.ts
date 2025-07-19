@@ -1,9 +1,8 @@
-// storage-adapter-import-placeholder
+import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
@@ -15,16 +14,16 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: 'https://nomad-neon.onrender.com',
-  cors: [
-    'https://nomad-vite.vercel.app/', // ✅ your Vercel frontend
-  ],
   admin: {
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
+
+  // ✅ Add this section for built-in CORS support
+  cors: ['https://nomad-vite.vercel.app'],
+
   collections: [Users, Media, Places],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -37,8 +36,5 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [
-    payloadCloudPlugin(),
-    // storage-adapter-placeholder
-  ],
+  plugins: [payloadCloudPlugin()],
 })
