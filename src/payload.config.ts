@@ -20,8 +20,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  cors: ['https://your-frontend.vercel.app'], // ✅ this is correct
-
+  cors: ['https://nomad-vite.vercel.app', 'http://localhost:3000'],
+  csrf: ['https://nomad-vite.vercel.app', 'http://localhost:3000'],
   collections: [Users, Media, Places],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
