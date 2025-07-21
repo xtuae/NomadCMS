@@ -20,19 +20,27 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  cors: ['https://nomad-vite.vercel.app', 'http://localhost:3000'],
+
+  cors: '*',
+
+  // CSRF should only include trusted frontends
   csrf: ['https://nomad-vite.vercel.app', 'http://localhost:3000'],
+
   collections: [Users, Media, Places],
   editor: lexicalEditor(),
+
   secret: process.env.PAYLOAD_SECRET || '',
+
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
+
   sharp,
   plugins: [payloadCloudPlugin()],
 })
