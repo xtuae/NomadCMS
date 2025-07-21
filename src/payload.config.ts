@@ -21,9 +21,6 @@ export default buildConfig({
     },
   },
 
-  cors: '*',
-
-  // CSRF should only include trusted frontends
   csrf: ['https://nomad-vite.vercel.app', 'http://localhost:3000'],
 
   collections: [Users, Media, Places],
