@@ -20,7 +20,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  cors: ['https://nomad-vite.vercel.app'],
+  cors: ['https://nomad-vite.vercel.app', 'http://localhost:5173'],
 
   collections: [Users, Media, Places],
   editor: lexicalEditor(),

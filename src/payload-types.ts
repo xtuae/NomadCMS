@@ -180,6 +180,8 @@ export interface Place {
   wellness: number;
   communityscore: number;
   crimerate: string;
+  city_one?: string | null;
+  city_two?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -305,6 +307,8 @@ export interface PlacesSelect<T extends boolean = true> {
   wellness?: T;
   communityscore?: T;
   crimerate?: T;
+  city_one?: T;
+  city_two?: T;
   updatedAt?: T;
   createdAt?: T;
 }

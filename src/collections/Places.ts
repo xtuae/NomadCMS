@@ -29,5 +29,9 @@ export const Places: CollectionConfig = {
     { name: 'wellness', type: 'number', required: true },
     { name: 'communityscore', type: 'number', required: true },
     { name: 'crimerate', type: 'text', required: true },
+
+    // ✅ New fields
+    { name: 'city_one', label: 'City One', type: 'text' },
+    { name: 'city_two', label: 'City Two', type: 'text' },
   ],
 }
