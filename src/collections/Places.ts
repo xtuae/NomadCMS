@@ -30,8 +30,15 @@ export const Places: CollectionConfig = {
     { name: 'communityscore', type: 'number', required: true },
     { name: 'crimerate', type: 'text', required: true },
 
-    // ✅ New fields
+    // Existing city fields
     { name: 'city_one', label: 'City One', type: 'text' },
     { name: 'city_two', label: 'City Two', type: 'text' },
+
+    // ✅ New fields
+    { name: 'country_description', label: 'Country Description', type: 'textarea' },
+    { name: 'city_oneinfo', label: 'City One Info', type: 'textarea' },
+    { name: 'city_twoinfo', label: 'City Two Info', type: 'textarea' },
+    { name: 'steps_apply', label: 'Steps to Apply', type: 'textarea' },
+    { name: 'why_choose', label: 'Why Choose This Country', type: 'textarea' }, // Added new field
   ],
 }

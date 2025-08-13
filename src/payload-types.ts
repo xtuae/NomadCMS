@@ -182,6 +182,11 @@ export interface Place {
   crimerate: string;
   city_one?: string | null;
   city_two?: string | null;
+  country_description?: string | null;
+  city_oneinfo?: string | null;
+  city_twoinfo?: string | null;
+  steps_apply?: string | null;
+  why_choose?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -309,6 +314,11 @@ export interface PlacesSelect<T extends boolean = true> {
   crimerate?: T;
   city_one?: T;
   city_two?: T;
+  country_description?: T;
+  city_oneinfo?: T;
+  city_twoinfo?: T;
+  steps_apply?: T;
+  why_choose?: T;
   updatedAt?: T;
   createdAt?: T;
 }
