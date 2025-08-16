@@ -33,12 +33,14 @@ export const Places: CollectionConfig = {
     // Existing city fields
     { name: 'city_one', label: 'City One', type: 'text' },
     { name: 'city_two', label: 'City Two', type: 'text' },
+    { name: 'minimum_incom', label: 'Minimum Requirement', type: 'text' },
+    { name: 'processing_time', label: 'Processing Time', type: 'text' },
 
     // ✅ New fields
     { name: 'country_description', label: 'Country Description', type: 'textarea' },
     { name: 'city_oneinfo', label: 'City One Info', type: 'textarea' },
     { name: 'city_twoinfo', label: 'City Two Info', type: 'textarea' },
     { name: 'steps_apply', label: 'Steps to Apply', type: 'textarea' },
-    { name: 'why_choose', label: 'Why Choose This Country', type: 'textarea' }, // Added new field
+    { name: 'why_choose', label: 'Why Choose This Country', type: 'textarea' },
   ],
 }

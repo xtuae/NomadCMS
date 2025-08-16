@@ -182,6 +182,8 @@ export interface Place {
   crimerate: string;
   city_one?: string | null;
   city_two?: string | null;
+  minimum_incom?: string | null;
+  processing_time?: string | null;
   country_description?: string | null;
   city_oneinfo?: string | null;
   city_twoinfo?: string | null;
@@ -314,6 +316,8 @@ export interface PlacesSelect<T extends boolean = true> {
   crimerate?: T;
   city_one?: T;
   city_two?: T;
+  minimum_incom?: T;
+  processing_time?: T;
   country_description?: T;
   city_oneinfo?: T;
   city_twoinfo?: T;
