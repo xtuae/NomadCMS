@@ -34,6 +34,9 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
+      ssl: {
+        rejectUnauthorized: false, // ✅ allow Supabase self-signed cert
+      },
     },
   }),
 
