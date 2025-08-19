@@ -9,7 +9,6 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Places } from './collections/Places'
-import { Blogs } from './collections/Blog'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +22,7 @@ export default buildConfig({
   },
   cors: ['https://nomad-frontend-xi.vercel.app', 'http://localhost:5173'],
 
-  collections: [Users, Media, Places, Blogs],
+  collections: [Users, Media, Places],
   editor: lexicalEditor(),
 
   secret: process.env.PAYLOAD_SECRET || '',
