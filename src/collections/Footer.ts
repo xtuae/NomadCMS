@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-export const Footer: CollectionConfig= {
+export const Footer: CollectionConfig = {
   slug: 'footer',
   fields: [
     {
@@ -23,6 +23,6 @@ export const Footer: CollectionConfig= {
       ],
     },
   ],
-};
+}
 
-export default Footer;
+export default Footer
