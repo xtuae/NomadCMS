@@ -63,5 +63,43 @@ export const Blogs: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
     },
+
+    // 👇 SEO group
+    {
+      name: 'seo',
+      type: 'group',
+      label: 'SEO',
+      admin: {
+        position: 'sidebar',
+      },
+      fields: [
+        {
+          name: 'metaTitle',
+          type: 'text',
+          maxLength: 60,
+          required: true,
+        },
+        {
+          name: 'metaDescription',
+          type: 'textarea',
+          maxLength: 160,
+        },
+        {
+          name: 'metaImage',
+          type: 'upload',
+          relationTo: 'media',
+          admin: {
+            description: 'Used for Open Graph / Twitter sharing',
+          },
+        },
+        {
+          name: 'keywords',
+          type: 'text',
+          admin: {
+            description: 'Comma separated keywords',
+          },
+        },
+      ],
+    },
   ],
 }

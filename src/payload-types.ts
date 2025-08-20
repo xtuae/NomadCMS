@@ -73,6 +73,8 @@ export interface Config {
     header: Header;
     footer: Footer;
     blogs: Blog;
+    pages: Page;
+    forms: Form;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -85,6 +87,8 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    forms: FormsSelect<false> | FormsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -222,14 +226,46 @@ export interface Header {
  */
 export interface Footer {
   id: number;
-  copyright?: string | null;
+  brand: {
+    logo: number | Media;
+    title: string;
+    description?: string | null;
+  };
   socialLinks?:
     | {
-        platform?: string | null;
-        url?: string | null;
+        platform: string;
+        url: string;
         id?: string | null;
       }[]
     | null;
+  quickLinks?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  tools?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  resources?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  contactus?: {
+    address?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    note?: string | null;
+  };
+  copyright?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -267,6 +303,147 @@ export interface Blog {
   coverUrl?: string | null;
   publishedAt?: string | null;
   isPublished?: boolean | null;
+  seo: {
+    metaTitle: string;
+    metaDescription?: string | null;
+    /**
+     * Used for Open Graph / Twitter sharing
+     */
+    metaImage?: (number | null) | Media;
+    /**
+     * Comma separated keywords
+     */
+    keywords?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  slug: string;
+  pageType: 'about' | 'contact' | 'privacy' | 'community' | 'support';
+  hero?: {
+    headline?: string | null;
+    subheadline?: string | null;
+    backgroundImage?: (number | null) | Media;
+    ctaText?: string | null;
+    ctaLink?: string | null;
+  };
+  mission?: {
+    title?: string | null;
+    intro?: string | null;
+    circles?:
+      | {
+          title?: string | null;
+          description?: string | null;
+          color?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whatWeDo?:
+    | {
+        icon?: string | null;
+        title?: string | null;
+        description?: string | null;
+        color?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  Contact_hero?: {
+    headline?: string | null;
+    subheadline?: string | null;
+    backgroundImage?: (number | null) | Media;
+  };
+  contactEmail?: string | null;
+  contactPhone?: string | null;
+  contactAddress?: string | null;
+  privacyHeader?: {
+    headline?: string | null;
+    subheadline?: string | null;
+    backgroundImage?: (number | null) | Media;
+  };
+  privacyText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  communityIntro?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  communityLinks?:
+    | {
+        label?: string | null;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  main_banner?: {
+    heading?: string | null;
+    subheading?: string | null;
+    backgroundImage?: (number | null) | Media;
+  };
+  faq?:
+    | {
+        question?: string | null;
+        answer?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  contacts?:
+    | {
+        title?: string | null;
+        email?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  address?: {
+    company?: string | null;
+    street?: string | null;
+    city?: string | null;
+    phone?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forms".
+ */
+export interface Form {
+  id: number;
+  formType: 'contact' | 'inquiry';
+  name: string;
+  email: string;
+  message?: string | null;
+  country?: (number | null) | Place;
   updatedAt: string;
   createdAt: string;
 }
@@ -300,6 +477,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blogs';
         value: number | Blog;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'forms';
+        value: number | Form;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -438,7 +623,13 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  copyright?: T;
+  brand?:
+    | T
+    | {
+        logo?: T;
+        title?: T;
+        description?: T;
+      };
   socialLinks?:
     | T
     | {
@@ -446,6 +637,36 @@ export interface FooterSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  quickLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  tools?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  resources?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  contactus?:
+    | T
+    | {
+        address?: T;
+        email?: T;
+        phone?: T;
+        note?: T;
+      };
+  copyright?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -462,6 +683,125 @@ export interface BlogsSelect<T extends boolean = true> {
   coverUrl?: T;
   publishedAt?: T;
   isPublished?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        metaImage?: T;
+        keywords?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  pageType?: T;
+  hero?:
+    | T
+    | {
+        headline?: T;
+        subheadline?: T;
+        backgroundImage?: T;
+        ctaText?: T;
+        ctaLink?: T;
+      };
+  mission?:
+    | T
+    | {
+        title?: T;
+        intro?: T;
+        circles?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              color?: T;
+              id?: T;
+            };
+      };
+  whatWeDo?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        color?: T;
+        id?: T;
+      };
+  Contact_hero?:
+    | T
+    | {
+        headline?: T;
+        subheadline?: T;
+        backgroundImage?: T;
+      };
+  contactEmail?: T;
+  contactPhone?: T;
+  contactAddress?: T;
+  privacyHeader?:
+    | T
+    | {
+        headline?: T;
+        subheadline?: T;
+        backgroundImage?: T;
+      };
+  privacyText?: T;
+  communityIntro?: T;
+  communityLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  main_banner?:
+    | T
+    | {
+        heading?: T;
+        subheading?: T;
+        backgroundImage?: T;
+      };
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  contacts?:
+    | T
+    | {
+        title?: T;
+        email?: T;
+        id?: T;
+      };
+  address?:
+    | T
+    | {
+        company?: T;
+        street?: T;
+        city?: T;
+        phone?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forms_select".
+ */
+export interface FormsSelect<T extends boolean = true> {
+  formType?: T;
+  name?: T;
+  email?: T;
+  message?: T;
+  country?: T;
   updatedAt?: T;
   createdAt?: T;
 }

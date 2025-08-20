@@ -12,6 +12,8 @@ import { Places } from './collections/Places'
 import { Header } from './collections/Header'
 import { Footer } from './collections/Footer'
 import { Blogs } from './collections/Blog'
+import { Pages } from './collections/Page'
+import { Forms } from './collections/Form'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +27,7 @@ export default buildConfig({
   },
   cors: ['https://nomad-frontend-xi.vercel.app', 'http://localhost:5173'],
 
-  collections: [Users, Media, Places, Header, Footer, Blogs],
+  collections: [Users, Media, Places, Header, Footer, Blogs, Pages, Forms],
   editor: lexicalEditor(),
 
   secret: process.env.PAYLOAD_SECRET || '',
