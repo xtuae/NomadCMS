@@ -22,11 +22,60 @@ export const Pages: CollectionConfig = {
       type: 'select',
       required: true,
       options: [
+        { label: 'Home', value: 'home' },
         { label: 'About', value: 'about' },
         { label: 'Contact', value: 'contact' },
         { label: 'Privacy Policy', value: 'privacy' },
         { label: 'Community', value: 'community' },
         { label: 'Support', value: 'support' },
+      ],
+    },
+    // --- Home ---
+    {
+      name: 'home_hero',
+      type: 'group',
+      admin: { condition: (data) => data.pageType === 'home' },
+      fields: [
+        { name: 'prefix_title', type: 'text' },
+        { name: 'headline', type: 'text' },
+        { name: 'subheadline', type: 'text' },
+        { name: 'paragraph', type: 'textarea' },
+        { name: 'backgroundImage', type: 'upload', relationTo: 'media' },
+        { name: 'testimonial_head', type: 'textarea', label: 'Quote' },
+        { name: 'testimonial_quote', type: 'text' },
+        {
+          name: 'testimonials',
+          type: 'array',
+          label: 'Kind Testimonials',
+          labels: {
+            singular: 'Testimonial',
+            plural: 'Testimonials',
+          },
+          fields: [
+            { name: 'authorName', type: 'text', label: 'Author Name' },
+            { name: 'authorAvatar', type: 'upload', relationTo: 'media', label: 'Author Avatar' },
+          ],
+        },
+        {
+          name: 'socialLinks',
+          type: 'array',
+          label: 'Social Media Links',
+          fields: [
+            { name: 'platform', type: 'text', label: 'Platform (e.g. Facebook)' },
+            { name: 'url', type: 'text', label: 'Profile URL' },
+            {
+              name: 'icon',
+              type: 'select',
+              label: 'Icon',
+              options: [
+                { label: 'Facebook', value: 'facebook' },
+                { label: 'Instagram', value: 'instagram' },
+                { label: 'Twitter', value: 'twitter' },
+                { label: 'YouTube', value: 'youtube' },
+              ],
+            },
+          ],
+        },
       ],
     },
 
@@ -61,6 +110,22 @@ export const Pages: CollectionConfig = {
           ],
         },
       ],
+    },
+
+    {
+      name: 'mission_last',
+      type: 'text',
+      admin: { condition: (data) => data.pageType === 'about' },
+    },
+    {
+      name: 'Section_title',
+      type: 'text',
+      admin: { condition: (data) => data.pageType === 'about' },
+    },
+    {
+      name: 'title_describtion',
+      type: 'text',
+      admin: { condition: (data) => data.pageType === 'about' },
     },
 
     {

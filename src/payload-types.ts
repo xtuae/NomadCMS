@@ -326,7 +326,31 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
-  pageType: 'about' | 'contact' | 'privacy' | 'community' | 'support';
+  pageType: 'home' | 'about' | 'contact' | 'privacy' | 'community' | 'support';
+  home_hero?: {
+    prefix_title?: string | null;
+    headline?: string | null;
+    subheadline?: string | null;
+    paragraph?: string | null;
+    backgroundImage?: (number | null) | Media;
+    testimonial_head?: string | null;
+    testimonial_quote?: string | null;
+    testimonials?:
+      | {
+          authorName?: string | null;
+          authorAvatar?: (number | null) | Media;
+          id?: string | null;
+        }[]
+      | null;
+    socialLinks?:
+      | {
+          platform?: string | null;
+          url?: string | null;
+          icon?: ('facebook' | 'instagram' | 'twitter' | 'youtube') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
   hero?: {
     headline?: string | null;
     subheadline?: string | null;
@@ -346,6 +370,9 @@ export interface Page {
         }[]
       | null;
   };
+  mission_last?: string | null;
+  Section_title?: string | null;
+  title_describtion?: string | null;
   whatWeDo?:
     | {
         icon?: string | null;
@@ -702,6 +729,32 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   pageType?: T;
+  home_hero?:
+    | T
+    | {
+        prefix_title?: T;
+        headline?: T;
+        subheadline?: T;
+        paragraph?: T;
+        backgroundImage?: T;
+        testimonial_head?: T;
+        testimonial_quote?: T;
+        testimonials?:
+          | T
+          | {
+              authorName?: T;
+              authorAvatar?: T;
+              id?: T;
+            };
+        socialLinks?:
+          | T
+          | {
+              platform?: T;
+              url?: T;
+              icon?: T;
+              id?: T;
+            };
+      };
   hero?:
     | T
     | {
@@ -725,6 +778,9 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
       };
+  mission_last?: T;
+  Section_title?: T;
+  title_describtion?: T;
   whatWeDo?:
     | T
     | {
