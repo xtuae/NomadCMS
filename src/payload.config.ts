@@ -40,7 +40,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
       ssl: {
-        rejectUnauthorized: false, // ✅ allow Supabase self-signed cert
+        rejectUnauthorized: false,
       },
     },
   }),
