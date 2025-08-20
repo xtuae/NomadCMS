@@ -38,10 +38,11 @@ export default buildConfig({
 
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
-      ssl: {
-        rejectUnauthorized: false,
-      },
+      connectionString: process.env.DATABASE_URI,
+      ssl:
+        process.env.NODE_ENV === 'production'
+          ? { rejectUnauthorized: false } // required in Vercel/Render
+          : false, // disable SSL for local
     },
   }),
 
