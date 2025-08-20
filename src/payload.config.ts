@@ -25,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  cors: ['https://nomad-frontend-xi.vercel.app', 'http://localhost:5173'],
+  cors: ['https://nomad-frontend-xi.vercel.app', 'http://localhost:3001'],
 
   collections: [Users, Media, Places, Header, Footer, Blogs, Pages, Forms],
   editor: lexicalEditor(),
