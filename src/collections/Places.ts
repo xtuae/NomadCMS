@@ -15,6 +15,13 @@ export const Places: CollectionConfig = {
   fields: [
     { name: 'countryName', label: 'Country Name', type: 'text', required: true },
     { name: 'image', label: 'Image URL', type: 'text', required: true },
+    {
+      name: 'imageMedia',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Country Image (Media)',
+    },
+
     { name: 'continent', type: 'text', required: true },
     { name: 'costPerDay', type: 'number', required: true },
     { name: 'internetSpeed', type: 'number', required: true },
