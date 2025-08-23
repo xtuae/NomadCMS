@@ -2,6 +2,12 @@ import type { CollectionConfig } from 'payload'
 
 export const Header: CollectionConfig = {
   slug: 'header',
+  access: {
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  },
   labels: {
     singular: 'Header',
     plural: 'Headers',
