@@ -2,6 +2,12 @@ import type { CollectionConfig } from 'payload'
 
 export const Footer: CollectionConfig = {
   slug: 'footer',
+  access: {
+    read: () => true,
+    create: () => true,
+    update: () => true,
+    delete: () => true,
+  },
   fields: [
     // --- Branding / Logo & Description ---
     {
