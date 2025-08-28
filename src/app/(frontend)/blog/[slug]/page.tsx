@@ -1,6 +1,12 @@
 import BlogPostContent from './_components/BlogPostContent';
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+type BlogPostPageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = params;
   return <BlogPostContent slug={slug} />;
 }
