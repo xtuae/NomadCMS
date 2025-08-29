@@ -3,8 +3,6 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { searchPlugin } from '@payloadcms/plugin-search'
-import { sentryPlugin } from '@payloadcms/plugin-sentry'
-import * as Sentry from '@sentry/nextjs'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { sitemapPlugin } from 'payload-sitemap-plugin'
 // import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
@@ -60,9 +58,6 @@ export default buildConfig({
     }),
     searchPlugin({
       collections: ['blogs'],
-    }),
-    sentryPlugin({
-      Sentry,
     }),
     seoPlugin({
       collections: ['pages', 'blogs'],
