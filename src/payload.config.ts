@@ -3,7 +3,6 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { searchPlugin } from '@payloadcms/plugin-search'
-import { sitemapPlugin } from 'payload-sitemap-plugin'
 // import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -57,11 +56,6 @@ export default buildConfig({
     }),
     searchPlugin({
       collections: ['blogs'],
-    }),
-    sitemapPlugin({
-      hostname: 'http://localhost:3000',
-      generateURL: () => '',
-      collections: {},
     }),
     vercelBlobStorage({
       enabled: true,
