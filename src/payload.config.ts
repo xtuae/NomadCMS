@@ -1,18 +1,18 @@
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
-const { formBuilder } = require('@payloadcms/plugin-form-builder')
-const { nestedDocs } = require('@payloadcms/plugin-nested-docs')
-const { redirects } = require('@payloadcms/plugin-redirects')
-const { search } = require('@payloadcms/plugin-search')
-const { sentry } = require('@payloadcms/plugin-sentry')
-const { seo } = require('@payloadcms/plugin-seo')
-const lexical = require('payload-plugin-lexical').default
-const { workflow } = require('payload-workflow')
-const { webp } = require('payload-webp')
-const { sitemap } = require('payload-sitemap-plugin')
-const { pagespeed } = require('payload-plugin-pagespeed')
-const { emailTemplate } = require('payload-email-template')
+import { formBuilder } from '@payloadcms/plugin-form-builder'
+import { nestedDocs } from '@payloadcms/plugin-nested-docs'
+import { redirects } from '@payloadcms/plugin-redirects'
+import { search } from '@payloadcms/plugin-search'
+import { sentry } from '@payloadcms/plugin-sentry'
+import { seo } from '@payloadcms/plugin-seo'
+import lexical from 'payload-plugin-lexical'
+import { workflow } from 'payload-workflow'
+import { webp } from 'payload-webp'
+import sitemap from 'payload-sitemap-plugin'
+import { pagespeed } from 'payload-plugin-pagespeed'
+import emailTemplate from 'payload-email-template'
 // import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -61,18 +61,6 @@ export default buildConfig({
 
   sharp,
   plugins: [
-    webp(),
-    sitemap({
-      // sitemap options
-    }),
-    pagespeed({
-      // pagespeed options
-    }),
-    emailTemplate({
-      // email template options
-    }),
-    lexical(),
-    workflow(),
     formBuilder({
       fields: {
         payment: true,
@@ -93,6 +81,12 @@ export default buildConfig({
     seo({
       collections: ['pages', 'posts'],
     }),
+    lexical(),
+    workflow(),
+    webp(),
+    sitemap({}),
+    pagespeed(),
+    emailTemplate(),
     vercelBlobStorage({
       enabled: true,
       collections: {
