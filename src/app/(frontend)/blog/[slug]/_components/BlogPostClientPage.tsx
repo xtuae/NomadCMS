@@ -71,8 +71,10 @@ function BlogPostClientPage({ blogPost }: { blogPost: BlogPost }) {
       </div>
 
       {/* Blog Post Content */}
-      <section className="max-w-3xl mx-auto mt-8 p-4">
-        <div className="blog-post-content" dangerouslySetInnerHTML={{ __html: blogPost.contentHtml }} />
+      <section className="container mx-auto px-4 py-8">
+        <div className="max-w-3xl mx-auto">
+          <div className="blog-post-content" dangerouslySetInnerHTML={{ __html: blogPost.contentHtml }} />
+        </div>
       </section>
     </>
   );
