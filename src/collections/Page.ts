@@ -14,9 +14,9 @@ export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
     read: () => true,
-    create: () => true,
-    update: () => true,
-    delete: () => true,
+    create: ({ req: { user } }) => user?.role === 'admin',
+    update: ({ req: { user } }) => user?.role === 'admin',
+    delete: ({ req: { user } }) => user?.role === 'admin',
   },
   admin: {
     useAsTitle: 'title',

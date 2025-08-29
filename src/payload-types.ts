@@ -135,6 +135,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  role: 'admin' | 'user';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -320,6 +321,10 @@ export interface Blog {
      */
     keywords?: string | null;
   };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -461,6 +466,10 @@ export interface Page {
     street?: string | null;
     city?: string | null;
     phone?: string | null;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -613,6 +622,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -772,6 +782,12 @@ export interface BlogsSelect<T extends boolean = true> {
         metaImage?: T;
         keywords?: T;
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -898,6 +914,12 @@ export interface PagesSelect<T extends boolean = true> {
         street?: T;
         city?: T;
         phone?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
       };
   updatedAt?: T;
   createdAt?: T;
