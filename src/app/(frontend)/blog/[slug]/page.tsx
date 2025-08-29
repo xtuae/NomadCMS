@@ -1,5 +1,3 @@
-import BlogPostContent from './_components/BlogPostContent';
-
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
