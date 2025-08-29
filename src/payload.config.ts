@@ -3,7 +3,6 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { searchPlugin } from '@payloadcms/plugin-search'
-import { seoPlugin } from '@payloadcms/plugin-seo'
 import { sitemapPlugin } from 'payload-sitemap-plugin'
 // import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -58,10 +57,6 @@ export default buildConfig({
     }),
     searchPlugin({
       collections: ['blogs'],
-    }),
-    seoPlugin({
-      collections: ['pages', 'blogs'],
-      uploadsCollection: 'media',
     }),
     sitemapPlugin({
       hostname: 'http://localhost:3000',
