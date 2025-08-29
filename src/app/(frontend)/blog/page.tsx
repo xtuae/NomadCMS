@@ -29,13 +29,13 @@ async function getHeaderBanner(): Promise<HeaderBanner | null> {
       },
     });
 
-    if (data?.docs?.[0]?.privacyHeader) {
-      const header = data.docs[0].privacyHeader;
-      const imageUrl = (header.backgroundImage as { url: string })?.url;
+    if ((data?.docs?.[0] as any)?.seo) {
+      const seo = (data.docs[0] as any).seo;
+      const imageUrl = (seo.metaImage as { url: string })?.url;
 
       return {
-        title: header.headline || 'Our Blog',
-        subtitle: header.subheadline || 'Insights and stories from the world of digital nomads.',
+        title: seo.metaTitle || 'Our Blog',
+        subtitle: seo.metaDescription || 'Insights and stories from the world of digital nomads.',
         backgroundImageUrl: imageUrl || '/blog-banner.jpg',
       };
     }
