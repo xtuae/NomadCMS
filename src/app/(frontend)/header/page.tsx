@@ -71,8 +71,8 @@ export default function Header() {
       </div>
 
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex flex-1 justify-center">
-        <ul className="flex space-x-6 text-sm font-medium">
+      <nav className="hidden md:flex flex-1 justify-center items-center">
+        <ul className="flex space-x-8 text-base font-medium">
           {header?.links?.map((link) => (
             <li key={link.label}>
               <a
@@ -85,6 +85,16 @@ export default function Header() {
           ))}
         </ul>
       </nav>
+
+      {/* Get Started Button */}
+      <div className="hidden md:flex">
+        <a
+          href="/get-started"
+          className="bg-yellow-400 text-black font-bold py-2 px-6 rounded-lg hover:bg-yellow-500 transition-colors"
+        >
+          Get Started
+        </a>
+      </div>
 
       {/* Mobile Menu Button */}
       <button
