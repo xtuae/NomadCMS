@@ -1,10 +1,11 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getPayloadUrl } from '@/utils/getPayloadUrl';
+import { getPayload } from 'payload';
+import config from '@/payload.config';
 
 interface BlogThumbnail {
-  id: string;
+  id: number;
   title: string;
   coverImage: string;
   slug: string;
@@ -18,27 +19,19 @@ interface HeaderBanner {
 
 async function getHeaderBanner(): Promise<HeaderBanner | null> {
   try {
-    const payloadBaseUrl = getPayloadUrl();
-    const rootUrl = payloadBaseUrl?.replace(/\/api$/, '').replace(/\/$/, '');
-    const apiBaseUrl = `${rootUrl}/api`;
-
-    const url = `${apiBaseUrl}/pages?where[title][equals]=Blog`;
-    const res = await fetch(url, { next: { revalidate: 60 } });
-
-    if (!res.ok) {
-      console.error(`HTTP error! status: ${res.status} from URL: ${url}`);
-      return null;
-    }
-
-    const data = await res.json();
+    const payload = await getPayload({ config });
+    const data = await payload.find({
+      collection: 'pages',
+      where: {
+        title: {
+          equals: 'Blog',
+        },
+      },
+    });
 
     if (data?.docs?.[0]?.privacyHeader) {
       const header = data.docs[0].privacyHeader;
-      let imageUrl = header.backgroundImage?.url;
-
-      if (imageUrl && imageUrl.startsWith('/')) {
-        imageUrl = `${rootUrl}${imageUrl}`;
-      }
+      const imageUrl = (header.backgroundImage as { url: string })?.url;
 
       return {
         title: header.headline || 'Our Blog',
@@ -58,20 +51,16 @@ async function getHeaderBanner(): Promise<HeaderBanner | null> {
 
 async function getBlogThumbnails(): Promise<BlogThumbnail[]> {
   try {
-    const payloadBaseUrl = getPayloadUrl();
-    const rootUrl = payloadBaseUrl?.replace(/\/api$/, '').replace(/\/$/, '');
-    const apiBaseUrl = `${rootUrl}/api`;
-
-    const url = `${apiBaseUrl}/blogs?limit=10&sort=-publishedAt`;
-    const res = await fetch(url, { next: { revalidate: 60 } });
-    const data = await res.json();
+    const payload = await getPayload({ config });
+    const data = await payload.find({
+      collection: 'blogs',
+      limit: 10,
+      sort: '-publishedAt',
+    });
 
     if (data?.docs) {
-      return data.docs.map((blog: { id: string; title: string; coverImage?: { url: string }; slug: string; }) => {
-        let coverImageUrl = blog.coverImage?.url;
-        if (coverImageUrl && coverImageUrl.startsWith('/')) {
-          coverImageUrl = `${rootUrl}${coverImageUrl}`;
-        }
+      return data.docs.map((blog) => {
+        const coverImageUrl = (blog.coverImage as { url: string })?.url;
         return {
           id: blog.id,
           title: blog.title,
