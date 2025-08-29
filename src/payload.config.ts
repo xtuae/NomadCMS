@@ -12,7 +12,7 @@ import { workflow } from 'payload-workflow'
 import { webp } from 'payload-webp'
 import sitemap from 'payload-sitemap-plugin'
 import { pagespeed } from 'payload-plugin-pagespeed'
-import emailTemplate from 'payload-email-template'
+const emailTemplate = require('payload-email-template')
 // import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
