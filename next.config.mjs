@@ -8,6 +8,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'nomadblob.vercel.app',
       },
+      {
+        protocol: 'https',
+        hostname: 'nomadcms.vercel.app',
+      },
     ],
   },
   // Your Next.js config here
