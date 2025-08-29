@@ -11,17 +11,17 @@ interface BlogPost {
   imageUrl: string;
 }
 
-async function getBlogPost(id: string): Promise<BlogPost | null> {
+async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_PAYLOAD_URL?.endsWith('/')
       ? process.env.NEXT_PUBLIC_PAYLOAD_URL.slice(0, -1)
       : process.env.NEXT_PUBLIC_PAYLOAD_URL;
-    const url = `${baseUrl}/blogs/${id}`;
+    const url = `${baseUrl}/blogs?where[slug][equals]=${slug}`;
     const res = await fetch(url);
     const data = await res.json();
 
-    if (data) {
-      const blog = data;
+    if (data.docs && data.docs.length > 0) {
+      const blog = data.docs[0];
       const imageUrl = blog.coverImage?.url?.startsWith('/api/media')
         ? `${process.env.NEXT_PUBLIC_PAYLOAD_URL?.replace(/\/api$/, '')}${blog.coverImage.url}`
         : blog.seo?.metaImage?.url?.startsWith('/api/media')
@@ -40,7 +40,7 @@ async function getBlogPost(id: string): Promise<BlogPost | null> {
       };
     }
   } catch (error) {
-    console.error(`Failed to fetch blog post with ID ${id}:`, error);
+    console.error(`Failed to fetch blog post with slug ${slug}:`, error);
   }
   return null;
 }

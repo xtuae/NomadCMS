@@ -1,6 +1,12 @@
 import { CollectionConfig } from 'payload'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
+const formatSlug = (val: string): string =>
+  val
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '')
+    .toLowerCase()
+
 export const Blogs: CollectionConfig = {
   slug: 'blogs',
   labels: {
@@ -12,6 +18,16 @@ export const Blogs: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        if (data.title) {
+          data.slug = formatSlug(data.title)
+        }
+        return data
+      },
+    ],
   },
   fields: [
     {

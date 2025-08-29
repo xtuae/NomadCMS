@@ -6,7 +6,7 @@ type BlogPostPageProps = {
   };
 };
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = params;
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
   return <BlogPostContent slug={slug} />;
 }
