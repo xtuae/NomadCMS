@@ -12,7 +12,6 @@ import { workflow } from 'payload-workflow'
 import { webp } from 'payload-webp'
 import sitemap from 'payload-sitemap-plugin'
 import { pagespeed } from 'payload-plugin-pagespeed'
-const emailTemplate = require('payload-email-template')
 // import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -85,8 +84,7 @@ export default buildConfig({
     workflow(),
     webp(),
     sitemap({}),
-    pagespeed(),
-    emailTemplate(),
+    pagespeed({}),
     vercelBlobStorage({
       enabled: true,
       collections: {
