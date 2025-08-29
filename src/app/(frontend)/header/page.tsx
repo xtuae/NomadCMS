@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import { getPayloadUrl } from "@/utils/getPayloadUrl";
 
 interface Media {
   url: string;
@@ -20,8 +21,7 @@ export default function Header() {
   const [header, setHeader] = useState<HeaderData | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const PAYLOAD_URL =
-    process.env.NEXT_PUBLIC_PAYLOAD_URL || "https://nomadblob.vercel.app/api";
+  const PAYLOAD_URL = getPayloadUrl();
 
   useEffect(() => {
     const fetchHeaderData = async () => {
@@ -65,7 +65,6 @@ export default function Header() {
               alt={header.title || "Logo"}
             width={120}
             height={80}
-            unoptimized
             className="rounded-md"
           />
         )}

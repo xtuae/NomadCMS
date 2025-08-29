@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { getPayloadUrl } from "@/utils/getPayloadUrl";
 
 interface Media {
   id: number;
@@ -55,8 +56,7 @@ export default function Footer() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const PAYLOAD_URL =
-    process.env.NEXT_PUBLIC_PAYLOAD_URL || "https://nomadblob.vercel.app/api";
+  const PAYLOAD_URL = getPayloadUrl();
 
   useEffect(() => {
     const fetchFooterData = async () => {
@@ -134,7 +134,6 @@ export default function Footer() {
               alt={footer.brand.logo.alt || "Brand Logo"}
               width={120}
               height={80}
-              unoptimized
               priority
               className="mb-4"
             />
@@ -256,7 +255,6 @@ export default function Footer() {
                     alt={link.label}
                     width={24}
                     height={24}
-                    unoptimized
                   />
                 ) : (
                   <span className="text-lg">{link.label}</span>

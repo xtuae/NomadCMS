@@ -1,6 +1,7 @@
 import React from 'react';
 import { convertToHtml } from '@/utils/lexicalToHtml';
 import BlogPostClientPage from './BlogPostClientPage';
+import { getPayloadUrl } from '@/utils/getPayloadUrl';
 
 interface BlogPost {
   id: string;
@@ -13,9 +14,7 @@ interface BlogPost {
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_PAYLOAD_URL?.endsWith('/')
-      ? process.env.NEXT_PUBLIC_PAYLOAD_URL.slice(0, -1)
-      : process.env.NEXT_PUBLIC_PAYLOAD_URL;
+    const baseUrl = getPayloadUrl();
     const url = `${baseUrl}/blogs?where[slug][equals]=${slug}`;
     const res = await fetch(url);
     const data = await res.json();

@@ -1,6 +1,18 @@
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+const { formBuilder } = require('@payloadcms/plugin-form-builder')
+const { nestedDocs } = require('@payloadcms/plugin-nested-docs')
+const { redirects } = require('@payloadcms/plugin-redirects')
+const { search } = require('@payloadcms/plugin-search')
+const { sentry } = require('@payloadcms/plugin-sentry')
+const { seo } = require('@payloadcms/plugin-seo')
+const lexical = require('payload-plugin-lexical').default
+const { workflow } = require('payload-workflow')
+const { webp } = require('payload-webp')
+const { sitemap } = require('payload-sitemap-plugin')
+const { pagespeed } = require('payload-plugin-pagespeed')
+const { emailTemplate } = require('payload-email-template')
 // import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -49,6 +61,38 @@ export default buildConfig({
 
   sharp,
   plugins: [
+    webp(),
+    sitemap({
+      // sitemap options
+    }),
+    pagespeed({
+      // pagespeed options
+    }),
+    emailTemplate({
+      // email template options
+    }),
+    lexical(),
+    workflow(),
+    formBuilder({
+      fields: {
+        payment: true,
+      },
+    }),
+    nestedDocs({
+      collections: ['pages'],
+    }),
+    redirects({
+      collections: ['pages', 'posts'],
+    }),
+    search({
+      collections: ['posts'],
+    }),
+    sentry({
+      dsn: process.env.SENTRY_DSN,
+    }),
+    seo({
+      collections: ['pages', 'posts'],
+    }),
     vercelBlobStorage({
       enabled: true,
       collections: {

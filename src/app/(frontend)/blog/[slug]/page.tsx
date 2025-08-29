@@ -1,12 +1,16 @@
 import BlogPostContent from './_components/BlogPostContent';
 
-type BlogPostPageProps = {
-  params: {
-    slug: string;
-  };
-};
+interface BlogPostPageProps {
+  params: Promise<{ slug: string }>;
+}
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  return <BlogPostContent slug={slug} />;
+  
+  return (
+    <div>
+      <h1>Blog Post</h1>
+      <p>Slug: {slug}</p>
+    </div>
+  );
 }

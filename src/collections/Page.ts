@@ -1,5 +1,15 @@
 import { CollectionConfig } from 'payload'
 
+const formatSlug = (val: string): string => {
+  return val
+    .trim()
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
@@ -10,6 +20,16 @@ export const Pages: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        if (data.title) {
+          data.slug = formatSlug(data.title)
+        }
+        return data
+      },
+    ],
   },
   fields: [
     {
