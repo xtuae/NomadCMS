@@ -107,7 +107,7 @@ export default function Header() {
 
       {/* Desktop Navigation */}
       <nav className="hidden md:flex flex-1 justify-center items-center">
-        <ul className="flex space-x-8 text-base font-medium">
+        <ul className="flex space-x-8 text-sm font-medium uppercase">
           {header?.links?.map((link) => (
             <li key={link.label}>
               <a
@@ -121,40 +121,50 @@ export default function Header() {
         </ul>
       </nav>
 
-      {/* 🔍 Search Icon + Bar (Right side only) */}
-      <div className="relative hidden md:flex items-center">
-        {!searchOpen ? (
-          <button
-            onClick={() => setSearchOpen(true)}
-            className="p-2 hover:text-yellow-400 transition"
-          >
-            <Search size={22} />
-          </button>
-        ) : (
-          <div className="relative flex flex-col w-64">
-            <input
-              type="text"
-              placeholder="Search country..."
-              value={searchTerm}
-              autoFocus
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            />
-            {filteredPlaces.length > 0 && (
-              <ul className="absolute top-full mt-1 bg-gray-800 border border-gray-700 rounded-lg max-h-60 overflow-y-auto shadow-lg z-50">
-                {filteredPlaces.map((place) => (
-                  <li
-                    key={place.id}
-                    className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
-                    onClick={() => handleSelect(place)}
-                  >
-                    {place.countryName || place.title}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
+      <div className="hidden md:flex items-center space-x-4">
+        {/* 🔍 Search Icon + Bar (Right side only) */}
+        <div className="relative flex items-center">
+          {!searchOpen ? (
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="p-2 hover:text-yellow-400 transition"
+            >
+              <Search size={22} />
+            </button>
+          ) : (
+            <div className="relative flex flex-col w-64">
+              <input
+                type="text"
+                placeholder="Search country..."
+                value={searchTerm}
+                autoFocus
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="bg-gray-800 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              />
+              {filteredPlaces.length > 0 && (
+                <ul className="absolute top-full mt-1 bg-gray-800 border border-gray-700 rounded-lg max-h-60 overflow-y-auto shadow-lg z-50">
+                  {filteredPlaces.map((place) => (
+                    <li
+                      key={place.id}
+                      className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
+                      onClick={() => handleSelect(place)}
+                    >
+                      {place.countryName || place.title}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Get Started Button */}
+        <a
+          href="/get-started"
+          className="bg-[#de6076] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#de6076]/90 transition-colors"
+        >
+          Get Started
+        </a>
       </div>
 
       {/* Mobile Menu Button */}
@@ -198,7 +208,7 @@ export default function Header() {
                       setMenuOpen(false);
                     }}
                   >
-                    {place.countryName || place.title}
+                      {place.countryName || place.title}
                   </li>
                 ))}
               </ul>

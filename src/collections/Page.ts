@@ -54,6 +54,8 @@ export const Pages: CollectionConfig = {
         { label: 'Privacy Policy', value: 'privacy' },
         { label: 'Community', value: 'community' },
         { label: 'Support', value: 'support' },
+        { label: 'General', value: 'general' },
+        { label: 'Blog Grid', value: 'blog_grid' },
       ],
     },
     // --- Home ---
@@ -126,6 +128,7 @@ export const Pages: CollectionConfig = {
       fields: [
         { name: 'title', type: 'text' },
         { name: 'intro', type: 'textarea' },
+        { name: 'missionImage', type: 'upload', relationTo: 'media' },
         {
           name: 'circles',
           type: 'array',
@@ -159,6 +162,7 @@ export const Pages: CollectionConfig = {
       type: 'array',
       admin: { condition: (data) => data.pageType === 'about' },
       fields: [
+        { name: 'whatWeDoImage', type: 'upload', relationTo: 'media' },
         { name: 'icon', type: 'text' }, // lucide icon name
         { name: 'title', type: 'text' },
         { name: 'description', type: 'textarea' },
@@ -197,7 +201,12 @@ export const Pages: CollectionConfig = {
     {
       name: 'privacyHeader',
       type: 'group',
-      admin: { condition: (data) => data.pageType === 'privacy' },
+      admin: {
+        condition: (data) =>
+          data.pageType === 'privacy' ||
+          data.pageType === 'general' ||
+          data.pageType === 'blog_grid',
+      },
       fields: [
         { name: 'headline', type: 'text' },
         { name: 'subheadline', type: 'textarea' },
@@ -207,7 +216,12 @@ export const Pages: CollectionConfig = {
     {
       name: 'privacyText',
       type: 'richText',
-      admin: { condition: (data) => data.pageType === 'privacy' },
+      admin: {
+        condition: (data) =>
+          data.pageType === 'privacy' ||
+          data.pageType === 'general' ||
+          data.pageType === 'blog_grid',
+      },
     },
 
     // --- Community ---

@@ -59,14 +59,17 @@ export default async function HomePage() {
 
   return (
     <main>
-      <section
-        className="relative flex items-center justify-between h-[80vh] px-8 md:px-14"
-        style={{
-          backgroundImage: bgUrl ? `url(${bgUrl})` : undefined,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
+      <section className="relative flex items-center justify-between h-[80vh] px-12 md:px-20">
+        {bgUrl && (
+          <Image
+            src={bgUrl}
+            alt="Background"
+            fill
+            quality={100}
+            priority
+            className="object-cover"
+          />
+        )}
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/50"></div>
 

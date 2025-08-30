@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import PageHeader from '../components/PageHeader';
 
 // === Types ===
 interface PrivacyHeader {
@@ -181,39 +181,11 @@ export default function PrivacyPolicyPage() {
 
   return (
     <>
-      {/* Main Banner Section */}
-      <div
-        className="relative w-full min-h-[60vh] px-4 py-10 sm:py-20 flex flex-col items-center justify-center text-center overflow-hidden"
-        style={{
-          backgroundSize: "cover",
-          backgroundPosition: "center bottom",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        {/* Background Image */}
-        {imageUrl && (
-          <div className="absolute inset-0">
-            <Image
-              src={imageUrl || "/fallback.webp"}
-              alt={privacyHeader?.backgroundImage?.alt || "Privacy Policy Main Banner background"}
-              fill
-              className="object-cover"
-              priority
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/50"></div>
-          </div>
-        )}
-
-        {/* Content */}
-        <div className="max-w-xl z-10 mt-16 sm:mt-28 text-white">
-          <h4 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
-            {privacyHeader.headline}
-          </h4>
-          <p className="text-lg sm:text-xl mb-8">{privacyHeader.subheadline}</p>
-        </div>
-      </div>
-
+      <PageHeader
+        title={privacyHeader.headline}
+        backgroundImage={imageUrl || null}
+        subheadline={privacyHeader.subheadline}
+      />
       {/* Privacy Policy Content Section */}
       <section className="bg-white text-gray-800 py-16 px-6 sm:px-12">
         <div className="max-w-5xl mx-auto">
