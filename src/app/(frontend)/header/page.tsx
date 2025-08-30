@@ -87,7 +87,7 @@ export default function Header() {
     setSearchTerm(place.countryName || place.title || "");
     setFilteredPlaces([]);
     setSearchOpen(false);
-    router.push(`/cities/${place.id}`);
+    router.push(`/cities/${place.countryName}`);
   };
 
   return (

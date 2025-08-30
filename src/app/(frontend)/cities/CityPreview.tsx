@@ -17,7 +17,7 @@ interface Media {
 interface City {
   id: string;
   countryName: string;
-  imageMedia?: Media;  // updated to match Payload upload object
+  imageMedia?: Media;
   monthlyCost?: number;
   climate?: number;
   visaDuration?: string;
@@ -29,11 +29,11 @@ interface City {
 }
 
 export default function CityPreview() {
-  const [places, setPlaces] = useState<City[]>([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [visaFilter, setVisaFilter] = useState("");
-  const [regionFilter, setRegionFilter] = useState("");
-  const [sortOrder, setSortOrder] = useState('');
+  const [places, setPlaces] = useState<City[]>([])
+  const [searchTerm, setSearchTerm] = useState("")
+  const [visaFilter, setVisaFilter] = useState("")
+  const [regionFilter, setRegionFilter] = useState("")
+  const [sortOrder, setSortOrder] = useState('')
 
   const router = useRouter()
   const CMS_URL = process.env.NEXT_PUBLIC_PAYLOAD_URL?.replace('/api', '')
@@ -53,8 +53,6 @@ export default function CityPreview() {
     };
     loadData();
   }, []);
-
- 
 
   const getRatingLevel = (value: number) => {
     if (value >= 80) return { level: 'Excellent', color: '#22c55e' }
@@ -129,7 +127,6 @@ export default function CityPreview() {
               setVisaFilter("");
               setRegionFilter("");
               setSortOrder('');
-
             }}
           >
             Reset
@@ -139,28 +136,24 @@ export default function CityPreview() {
 
       {/* City Cards */}
       <div className="city-grid">
-        {filteredPlaces.map((city) => {
-          return (
-            <div key={city.id} className="city-card">
-              <div className="city-image-container">
-               {city.imageMedia && (
+        {filteredPlaces.map((city) => (
+          <div key={city.id} className="city-card">
+            <div className="city-image-container">
+              {city.imageMedia && (
                 <Image
-                    src={`${CMS_URL}${city.imageMedia.url}`} // now allowed
-                    alt={city.countryName}
-                    width={400}
-                    height={300}
-                    className="city-image"
-                    placeholder="blur"
-                    blurDataURL={`${CMS_URL}${city.imageMedia.url}`}
+                  src={`${CMS_URL}${city.imageMedia.url}`}
+                  alt={city.countryName}
+                  width={400}
+                  height={300}
+                  className="city-image"
+                  placeholder="blur"
+                  blurDataURL={`${CMS_URL}${city.imageMedia.url}`}
                 />
-                )}
-
-
-
-                <div className="overlay-top">
-                  <h3>{city.countryName}</h3>
-                </div>
+              )}
+              <div className="overlay-top">
+                <h3>{city.countryName}</h3>
               </div>
+            </div>
 
             <div className="city-info">
               <div className="city-meta">
@@ -171,36 +164,34 @@ export default function CityPreview() {
                 </span>
               </div>
 
-                <div className="rating-bars">
-                  {["costPerDay", "internetSpeed", "safetyScore", "overallScore"].map((key) => {
-                    const value = Number(city[key as keyof City] || 0);
-                    const { level, color } = getRatingLevel(value);
-                    return (
-                      <div key={key} className="rating">
-                        <span>{key}</span>
+              <div className="rating-bars">
+                {["costPerDay", "internetSpeed", "safetyScore", "overallScore"].map((key) => {
+                  const value = Number(city[key as keyof City] || 0);
+                  const { level, color } = getRatingLevel(value);
+                  return (
+                    <div key={key} className="rating">
+                      <span>{key}</span>
+                      <div className="bar-wrapper">
                         <div className="bar">
                           <div className="fill" style={{ width: `${value}%`, background: color }} />
                         </div>
-                        <div>{level}</div>
+                        <span className="bar-value">{value}%</span>
                       </div>
-                    );
-                  })}
-                </div>
+                      <div>{level}</div>
+                    </div>
+                  );
+                })}
+              </div>
 
-               <div className="card-buttons">
-                <button
-                  className="details-btn"
-                  onClick={() => router.push(`/cities/${city.id}`)}
-                >
+              <div className="card-buttons">
+                <button className="details-btn" onClick={() => router.push(`/cities/${city.countryName}`)}>
                   View Details
                 </button>
               </div>
-
-              </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
-  )
+  );
 }
