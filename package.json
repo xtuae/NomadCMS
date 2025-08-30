@@ -43,7 +43,6 @@
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "express": "^5.1.0",
-    "framer-motion": "^12.23.12",
     "graphql": "^16.8.1",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.541.0",
