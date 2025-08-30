@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import PageHeader from '../components/PageHeader';
 
 // Icons
-import { Wifi, DollarSign, ShieldCheck, Users, HeartPulse, Music2 } from 'lucide-react';
 
 // === Types ===
 interface Circle {
@@ -17,6 +16,10 @@ interface Circle {
 
 interface WhatWeDoItem {
   id: string;
+  whatWeDoImage?: {
+    url: string;
+    alt?: string;
+  };
   icon: string;
   title: string;
   description: string;
@@ -24,6 +27,7 @@ interface WhatWeDoItem {
 
 interface Hero {
   headline: string;
+  subheadline?: string;
   backgroundImage?: {
     url: string;
     alt?: string;
@@ -34,6 +38,10 @@ interface Hero {
 interface Mission {
   title: string;
   intro: string;
+  missionImage?: {
+    url: string;
+    alt?: string;
+  };
   circles: Circle[];
 }
 
@@ -47,35 +55,11 @@ interface PageData {
   whatWeDo: WhatWeDoItem[];
 }
 
-// Icon mapping
-const iconComponentMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  'Internet/ Wifi': Wifi,
-  'Dollar ': DollarSign,
-  'Safety': ShieldCheck,
-  'Community ': Users,
-  'Wellness': HeartPulse,
-  'Music ': Music2,
-};
-
-const iconColorMap: Record<string, string> = {
-  'Internet/ Wifi': 'text-blue-600',
-  'Dollar ': 'text-green-600',
-  'Safety': 'text-red-600',
-  'Community ': 'text-purple-600',
-  'Wellness': 'text-pink-600',
-  'Music ': 'text-yellow-600',
-};
-
-const circleColors = {
-  Purple: '#a855f7',
-  Pista: '#4ade80',
-  Mango: '#facc15',
-};
 
 export default function AboutPage() {
   const [pageData, setPageData] = useState<PageData | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  
 
   useEffect(() => {
     const fetchPageData = async () => {
@@ -114,7 +98,6 @@ export default function AboutPage() {
   const {
     hero,
     mission,
-    mission_last,
     Section_title,
     title_describtion,
     whatWeDo,
@@ -125,109 +108,96 @@ export default function AboutPage() {
     ? `${process.env.NEXT_PUBLIC_PAYLOAD_URL?.replace(/\/api$/, '')}${hero.backgroundImage.url}`
     : hero?.backgroundImage?.url;
 
-  const handleExploreClick = () => {
-    router.push('/');
-    setTimeout(() => {
-      const citiesSection = document.getElementById('cities');
-      if (citiesSection) {
-        citiesSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
+  const missionImageUrl = mission?.missionImage?.url?.startsWith('/api/media')
+    ? `${process.env.NEXT_PUBLIC_PAYLOAD_URL?.replace(/\/api$/, '')}${mission.missionImage.url}`
+    : mission?.missionImage?.url;
+
+  const whatWeDoImageUrl = whatWeDo?.[0]?.whatWeDoImage?.url?.startsWith('/api/media')
+    ? `${process.env.NEXT_PUBLIC_PAYLOAD_URL?.replace(/\/api$/, '')}${whatWeDo[0].whatWeDoImage.url}`
+    : whatWeDo?.[0]?.whatWeDoImage?.url;
+
+  
 
   return (
     <>
-      {/* Hero Section */}
-      <div
-        className="relative w-full min-h-[60vh] px-4 py-10 sm:py-20 flex flex-col items-center justify-center text-center overflow-hidden"
-        style={{
-          backgroundSize: "cover",
-          backgroundPosition: "center bottom",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        {/* Background Image */}
-        {imageUrl && (
-          <div className="absolute inset-0">
-            <Image
-              src={imageUrl || "/fallback.webp"}   // ✅ proper URL with fallback
-              alt={hero?.backgroundImage?.alt || "Hero background"}
-              fill
-              className="object-cover"
-              priority
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/50"></div>
-          </div>
-        )}
-
-        {/* Content */}
-        <div className="max-w-xl z-10 mt-16 sm:mt-28 text-white">
-          <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
-            {hero.headline}
-          </h1>
-
-          {hero.ctaText && (
-            <button
-              onClick={handleExploreClick}
-              className="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition"
-            >
-              {hero.ctaText}
-            </button>
-          )}
-        </div>
-      </div>
-
+      <PageHeader title={hero.headline} backgroundImage={imageUrl || null} subheadline={hero.subheadline} />
       {/* Our Mission */}
       <section className="bg-white text-gray-800 py-16 px-6 sm:px-12">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold">{mission.title}</h2>
-          <p className="text-base sm:text-lg text-gray-600 leading-7 mt-4 font-semibold">
-            {mission.intro}
-          </p>
-
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6 mt-8">
-            {mission.circles.map((circle) => {
-              const bgColor = circleColors[circle.color] || '#a855f7';
-              return (
-                <div
-                  key={circle.id}
-                  className="w-60 h-60 rounded-full shadow-md flex flex-col items-center justify-center p-6 text-sm font-medium text-white text-center"
-                  style={{ backgroundColor: bgColor }}
-                >
-                  <h4 className="text-base font-semibold mb-2">{circle.title}</h4>
-                  <p>{circle.description}</p>
-                </div>
-              );
-            })}
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-12 items-stretch">
+            <div className="md:col-span-2 relative">
+              <Image
+                src={missionImageUrl || imageUrl || "/fallback.webp"}
+                alt={mission?.missionImage?.alt || "Our Mission"}
+                fill
+                className="rounded-lg shadow-lg object-cover"
+              />
+            </div>
+            <div className="md:col-span-3">
+              <span className="text-[#de6076] bg-[#de6076]/20 px-3 py-1 rounded-full text-sm font-semibold">
+                Why Choosing Us?
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold mt-4">{mission.title}</h2>
+              <p className="text-base sm:text-lg text-gray-600 leading-7 mt-4">
+                {mission.intro}
+              </p>
+              <div className="grid grid-cols-1 gap-6 mt-8">
+                {mission.circles.map((circle, index) => (
+                  <div key={circle.id} className={`p-6 rounded-lg shadow-md ${index % 2 === 0 ? 'bg-white' : 'bg-gray-800 text-white'}`}>
+                    <div className="flex items-center space-x-4">
+                      <div className={`p-3 rounded-full ${index % 2 === 0 ? 'bg-[#de6076]/20' : 'bg-[#de6076]'}`}>
+                        <svg className={`w-6 h-6 ${index % 2 === 0 ? 'text-[#de6076]' : 'text-white'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold">{circle.title}</h4>
+                        <p className={`${index % 2 === 0 ? 'text-gray-600' : 'text-gray-300'}`}>{circle.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-
-          <p className="text-base sm:text-lg text-gray-700 leading-7 mt-6">{mission_last}</p>
         </div>
       </section>
 
       {/* What We Do */}
-      <section className="py-16 px-4 sm:px-6 lg:px-12 bg-gray-50 text-center">
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{Section_title}</h2>
-        <p className="text-gray-600 max-w-3xl mx-auto mb-10 text-base sm:text-lg font-semibold">
-          {title_describtion}
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {whatWeDo.map((item) => {
-            const IconComponent = iconComponentMap[item.icon] || Wifi;
-            const iconColor = iconColorMap[item.icon] || 'text-blue-600';
-
-            return (
-              <div key={item.id} className="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <IconComponent className={`w-5 h-5 ${iconColor}`} />
-                  <h4 className="text-xl font-semibold">{item.title}</h4>
-                </div>
-                <p className="text-gray-700 text-sm">{item.description}</p>
+      <section className="py-16 px-4 sm:px-6 lg:px-12 bg-white text-center">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
+            <div className="md:col-span-3 text-left">
+              <span className="text-[#de6076] bg-[#de6076]/20 px-3 py-1 rounded-full text-sm font-semibold">
+                Our Focused
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold mt-4">{Section_title}</h2>
+              <p className="text-base sm:text-lg text-gray-600 leading-7 mt-4">
+                {title_describtion}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                {whatWeDo.map((item, index) => (
+                  <div key={item.id} className={`p-6 rounded-lg shadow-md ${index === 0 ? 'bg-gray-800 text-white' : 'bg-white'}`}>
+                    <div className="flex items-center space-x-4">
+                      <div className={`p-3 rounded-full ${index === 0 ? 'bg-[#de6076]' : 'bg-[#de6076]/20'}`}>
+                        <svg className={`w-6 h-6 ${index === 0 ? 'text-white' : 'text-[#de6076]'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                      </div>
+                      <div>
+                        <h4 className="text-lg font-semibold">{item.title}</h4>
+                        <p className={`${index === 0 ? 'text-gray-300' : 'text-gray-600'}`}>{item.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            );
-          })}
+            </div>
+            <div className="md:col-span-2 relative h-full">
+              <Image
+                src={whatWeDoImageUrl || imageUrl || "/fallback.webp"}
+                alt="What We Do"
+                fill
+                className="rounded-lg shadow-lg object-cover"
+              />
+            </div>
+          </div>
         </div>
       </section>
     </>

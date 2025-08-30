@@ -1,0 +1,249 @@
+/* General Body Styles */
+body {
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+.city-details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 2rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Content Grid */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .content-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-box {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.stat-box .icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #6366f1;
+}
+
+.stat-box h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Living Costs & Quality */
+.living-costs-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.monthly-cost-display {
+  text-align: center;
+}
+
+.monthly-cost-display h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.monthly-cost-display span {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+.quick-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.quality-ratings {
+  flex-grow: 1;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.rating-label {
+  width: 120px;
+  font-weight: 500;
+}
+
+.rating-bar {
+  flex-grow: 1;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rating-bar .fill {
+  height: 100%;
+  border-radius: 4px;
+  animation: fillBar 1.5s ease-out forwards;
+}
+
+@keyframes fillBar {
+  from {
+    width: 0;
+  }
+  to {
+    /* width is set inline */
+  }
+}
+
+/* Visa Overview */
+.visa-requirements ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.visa-requirements li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 0.5rem;
+}
+
+.visa-requirements li::before {
+  content: '✓';
+  color: #22c55e;
+  position: absolute;
+  left: 0;
+}
+
+/* How to Apply */
+.how-to-apply {
+  background: #4f46e5;
+  color: white;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.how-to-apply h2 {
+  color: white;
+}
+
+.how-to-apply ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Bottom Stats */
+.bottom-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.stat-block {
+  background: #e5e7eb;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-block h5 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Why Perfect Section */
+.why-perfect ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Inquiry Form */
+.inquiry-form-card {
+  background: #6366f1;
+  color: white;
+}
+
+.inquiry-form-card h2 {
+  color: white;
+}
+
+.inquiry-form input,
+.inquiry-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  margin-top: 0.5rem;
+  color: #333;
+}
+
+.inquiry-form button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #de6076;
+  color: white;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.inquiry-form button:hover {
+  background: #c14d62;
+}

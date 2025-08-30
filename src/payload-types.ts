@@ -327,7 +327,7 @@ export interface Page {
   id: number;
   title: string;
   slug: string;
-  pageType: 'home' | 'about' | 'contact' | 'privacy' | 'community' | 'support';
+  pageType: 'home' | 'about' | 'contact' | 'privacy' | 'community' | 'support' | 'general' | 'blog_grid';
   home_hero?: {
     prefix_title?: string | null;
     headline?: string | null;
@@ -362,6 +362,7 @@ export interface Page {
   mission?: {
     title?: string | null;
     intro?: string | null;
+    missionImage?: (number | null) | Media;
     circles?:
       | {
           title?: string | null;
@@ -376,6 +377,7 @@ export interface Page {
   title_describtion?: string | null;
   whatWeDo?:
     | {
+        whatWeDoImage?: (number | null) | Media;
         icon?: string | null;
         title?: string | null;
         description?: string | null;
@@ -771,6 +773,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         title?: T;
         intro?: T;
+        missionImage?: T;
         circles?:
           | T
           | {
@@ -786,6 +789,7 @@ export interface PagesSelect<T extends boolean = true> {
   whatWeDo?:
     | T
     | {
+        whatWeDoImage?: T;
         icon?: T;
         title?: T;
         description?: T;

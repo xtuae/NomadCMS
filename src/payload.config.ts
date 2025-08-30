@@ -37,7 +37,17 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  cors: ['https://nomad-frontend-xi.vercel.app', 'http://localhost:3000', 'http://localhost:3001'],
+  cors: [
+    'https://nomadcms.vercel.app',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://localhost:3002',
+    'http://localhost:3003',
+    'http://localhost:3004',
+    'http://localhost:3005',
+    'http://localhost:3006',
+    'http://localhost:3007',
+  ],
 
   collections: [Users, Media, Places, Header, Footer, Blogs, Pages, Forms],
   editor: lexicalEditor(),
