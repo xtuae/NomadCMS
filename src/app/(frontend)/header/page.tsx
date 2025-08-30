@@ -159,12 +159,7 @@ export default function Header() {
         </div>
 
         {/* Get Started Button */}
-        <a
-          href="/get-started"
-          className="bg-[#de6076] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#de6076]/90 transition-colors"
-        >
-          Get Started
-        </a>
+        
       </div>
 
       {/* Mobile Menu Button */}

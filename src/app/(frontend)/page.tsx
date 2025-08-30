@@ -210,7 +210,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 py-16">
         <h2 className="section-title text-3xl font-bold text-center mb-6">
           Explore Cities
         </h2>

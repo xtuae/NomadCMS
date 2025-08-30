@@ -170,7 +170,7 @@ export default function CityPreview() {
                   const { level, color } = getRatingLevel(value);
                   return (
                     <div key={key} className="rating">
-                      <span>{key}</span>
+                      <span>{key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</span>
                       <div className="bar-wrapper">
                         <div className="bar">
                           <div className="fill" style={{ width: `${value}%`, background: color }} />

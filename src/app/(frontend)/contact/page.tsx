@@ -116,7 +116,7 @@ export default function ContactPage() {
               <div>
                 <h3 className="text-3xl font-bold mb-3">Contact Information</h3>
                 <p className="text-gray-300">
-                  Have a question or want to work with us? Fill out the form, and we'll get back to you.
+                  Have a question or want to work with us? Fill out the form, and we&#39;ll get back to you.
                 </p>
               </div>
               <div className="space-y-6">

@@ -5,6 +5,10 @@ import config from '@/payload.config';
 import BlogList from './BlogList';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 
+interface PageProps {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
 interface HeaderBanner {
   title: string;
   subtitle: string;
@@ -43,8 +47,9 @@ async function getHeaderBanner(): Promise<HeaderBanner | null> {
   };
 }
 
-export default async function BlogPage({ searchParams }: { searchParams: { page?: string } }) {
+export default async function BlogPage({ searchParams }: PageProps) {
   const headerBanner = await getHeaderBanner();
+  const params = await searchParams;
 
   return (
     <div className="bg-white text-gray-800">
@@ -58,7 +63,7 @@ export default async function BlogPage({ searchParams }: { searchParams: { page?
       {/* Blog Thumbnails Section */}
       <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <Suspense fallback={<LoadingSpinner />}>
-          <BlogList searchParams={searchParams} />
+          <BlogList searchParams={params} />
         </Suspense>
       </div>
     </div>

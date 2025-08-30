@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import PageHeader from '../components/PageHeader';
 
 // Icons
-import { Wifi, DollarSign, ShieldCheck, Users, HeartPulse, Music2 } from 'lucide-react';
 
 // === Types ===
 interface Circle {
@@ -57,35 +55,11 @@ interface PageData {
   whatWeDo: WhatWeDoItem[];
 }
 
-// Icon mapping
-const iconComponentMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  'Internet/ Wifi': Wifi,
-  'Dollar ': DollarSign,
-  'Safety': ShieldCheck,
-  'Community ': Users,
-  'Wellness': HeartPulse,
-  'Music ': Music2,
-};
-
-const iconColorMap: Record<string, string> = {
-  'Internet/ Wifi': 'text-blue-600',
-  'Dollar ': 'text-green-600',
-  'Safety': 'text-red-600',
-  'Community ': 'text-purple-600',
-  'Wellness': 'text-pink-600',
-  'Music ': 'text-yellow-600',
-};
-
-const circleColors = {
-  Purple: '#a855f7',
-  Pista: '#4ade80',
-  Mango: '#facc15',
-};
 
 export default function AboutPage() {
   const [pageData, setPageData] = useState<PageData | null>(null);
   const [loading, setLoading] = useState(true);
-  const router = useRouter();
+  
 
   useEffect(() => {
     const fetchPageData = async () => {
@@ -124,7 +98,6 @@ export default function AboutPage() {
   const {
     hero,
     mission,
-    mission_last,
     Section_title,
     title_describtion,
     whatWeDo,
@@ -143,15 +116,7 @@ export default function AboutPage() {
     ? `${process.env.NEXT_PUBLIC_PAYLOAD_URL?.replace(/\/api$/, '')}${whatWeDo[0].whatWeDoImage.url}`
     : whatWeDo?.[0]?.whatWeDoImage?.url;
 
-  const handleExploreClick = () => {
-    router.push('/');
-    setTimeout(() => {
-      const citiesSection = document.getElementById('cities');
-      if (citiesSection) {
-        citiesSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 100);
-  };
+  
 
   return (
     <>
